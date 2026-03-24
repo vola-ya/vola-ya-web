@@ -15,12 +15,12 @@ function EmailForm({ dark = false }: { dark?: boolean }) {
   if (submitted) {
     return (
       <div
-        className={`flex items-center gap-3 py-5 ${dark ? "text-white" : "text-[#111]"}`}
+        className={`flex items-center gap-3 py-5 ${dark ? "text-white" : "text-[#3d2b1f]"}`}
       >
         <span
           className="flex items-center justify-center w-8 h-8 rounded-full font-bold text-sm"
           style={{
-            background: dark ? "rgba(255,255,255,0.2)" : "#111",
+            background: dark ? "rgba(255,255,255,0.2)" : "#3d2b1f",
             color: "#fff",
           }}
         >
@@ -44,12 +44,12 @@ function EmailForm({ dark = false }: { dark?: boolean }) {
         className={`flex-1 px-5 py-4 text-base rounded-xl border-2 outline-none transition-colors ${
           dark
             ? "bg-white/10 border-white/25 text-white placeholder:text-white/40 focus:border-white/70"
-            : "bg-white border-[#BDBDBD] text-[#111] placeholder:text-[#aaa] focus:border-[#FF5C00]"
+            : "bg-white border-[#c8b09a] text-[#3d2b1f] placeholder:text-[#b09080] focus:border-[#e07842]"
         }`}
       />
       <button
         type="submit"
-        className="px-7 py-4 bg-[#FF5C00] text-white font-bold text-base rounded-xl hover:bg-[#E65200] active:scale-[0.97] transition-all duration-150 whitespace-nowrap cursor-pointer"
+        className="px-7 py-4 bg-[#e07842] text-white font-bold text-base rounded-xl hover:bg-[#c4956a] active:scale-[0.97] transition-all duration-150 whitespace-nowrap cursor-pointer"
       >
         Quiero recibir alertas gratis
       </button>
@@ -67,14 +67,14 @@ function DealCard() {
         animation: "floatCard 5s ease-in-out infinite",
       }}
     >
-      <div className="h-1.5 bg-[#FF5C00] rounded-t-2xl" />
+      <div className="h-1.5 bg-[#e07842] rounded-t-2xl" />
 
       <div className="p-6">
         <div className="flex items-center justify-between mb-5">
-          <span className="text-xs font-extrabold tracking-widest text-[#FF5C00] uppercase">
+          <span className="text-xs font-extrabold tracking-widest text-[#e07842] uppercase">
             Vola Ya
           </span>
-          <span className="text-[10px] bg-[#FF5C00] text-white px-2.5 py-1 rounded-full font-bold tracking-wide uppercase">
+          <span className="text-[10px] bg-[#e07842] text-white px-2.5 py-1 rounded-full font-bold tracking-wide uppercase">
             Nueva oferta
           </span>
         </div>
@@ -89,7 +89,7 @@ function DealCard() {
               height="20"
               viewBox="0 0 20 20"
               fill="none"
-              className="text-[#FF5C00] flex-shrink-0"
+              className="text-[#e07842] flex-shrink-0"
             >
               <path
                 d="M2 10h16M12 4l6 6-6 6"
@@ -103,7 +103,7 @@ function DealCard() {
               MAD
             </span>
           </div>
-          <div className="flex items-center gap-2 text-xs text-[#999]">
+          <div className="flex items-center gap-2 text-xs text-[#9e8070]">
             <span>Buenos Aires</span>
             <span>·</span>
             <span>Madrid</span>
@@ -112,30 +112,30 @@ function DealCard() {
           </div>
         </div>
 
-        <div className="border-t border-dashed border-[#EBEBEB] my-4" />
+        <div className="border-t border-dashed border-[#e5ddd0] my-4" />
 
         <div className="flex items-end justify-between mb-4">
           <div>
-            <p className="text-xs text-[#aaa] line-through mb-0.5">
+            <p className="text-xs text-[#b09080] line-through mb-0.5">
               $1,385 USD
             </p>
             <div className="flex items-baseline gap-1">
-              <span className="text-4xl font-extrabold text-[#111] leading-none">
+              <span className="text-4xl font-extrabold text-[#3d2b1f] leading-none">
                 $385
               </span>
-              <span className="text-sm text-[#888] font-medium">USD</span>
+              <span className="text-sm text-[#9e8070] font-medium">USD</span>
             </div>
           </div>
-          <div className="bg-[#FF5C00] text-white font-extrabold text-lg px-3 py-2 rounded-xl leading-none">
+          <div className="bg-[#e07842] text-white font-extrabold text-lg px-3 py-2 rounded-xl leading-none">
             −72%
           </div>
         </div>
 
-        <div className="bg-[#F8F8F8] rounded-xl px-4 py-2.5 flex items-center justify-between">
-          <span className="text-[11px] text-[#999]">Válido hasta 15 abr</span>
-          <span className="text-[11px] font-semibold text-[#FF5C00]">
-            3 asientos ·{" "}
-            <span className="text-[#111]">Ver oferta →</span>
+        <div className="bg-[#f5f0ea] rounded-xl px-4 py-2.5 flex items-center justify-between">
+          <span className="text-[11px] text-[#9e8070] whitespace-nowrap">Válido hasta 15 abril</span>
+          <span className="text-[11px] font-semibold text-[#e07842] flex flex-col items-end">
+            <span>3 asientos ·</span>
+            <span className="text-[#3d2b1f]">Ver oferta →</span>
           </span>
         </div>
       </div>
@@ -147,11 +147,11 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen font-sans">
       {/* NAV */}
-      <nav className="px-6 md:px-14 py-5 flex items-center justify-between border-b border-[#F0F0F0]">
+      <nav className="px-6 md:px-14 py-5 flex items-center justify-between border-b border-[#e8e0d4]">
         <span className="text-xl font-extrabold tracking-tight">
-          vola<span className="text-[#FF5C00]">ya</span>
+          vola<span className="text-[#e07842]">ya</span>
         </span>
-        <span className="text-xs text-[#aaa] font-medium tracking-wide uppercase">
+        <span className="text-xs text-[#b09080] font-medium tracking-wide uppercase">
           Sudamérica · 2026
         </span>
       </nav>
@@ -175,7 +175,7 @@ export default function Home() {
                 className="mb-6"
                 style={{ animation: "fadeInUp 0.6s ease-out both" }}
               >
-                <span className="inline-flex items-center gap-2.5 bg-[#FF5C00] text-white text-xs font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full">
+                <span className="inline-flex items-center gap-2.5 bg-[#e07842] text-white text-xs font-bold tracking-[0.12em] uppercase px-4 py-2 rounded-full">
                   <svg
                     width="13"
                     height="13"
@@ -196,33 +196,32 @@ export default function Home() {
               </div>
 
               <h1
-                className="text-[2.8rem] sm:text-6xl xl:text-7xl font-extrabold leading-[0.92] tracking-[-0.02em] text-[#111] mb-6"
+                className="text-[2.8rem] sm:text-6xl xl:text-7xl font-extrabold leading-[0.92] tracking-[-0.02em] text-[#3d2b1f] mb-6"
                 style={{ animation: "fadeInUp 0.6s 0.05s ease-out both" }}
               >
                 Los mejores
                 <br />
                 vuelos de
                 <br />
-                <span className="text-[#FF5C00]">Sudamérica.</span>
+                <span className="text-[#e07842]">Sudamérica.</span>
                 <br />
-                <span className="text-[#555] text-[2rem] sm:text-4xl xl:text-5xl font-bold tracking-[-0.01em]">
+                <span className="text-[#7d5a48] text-[2rem] sm:text-4xl xl:text-5xl font-bold tracking-[-0.01em]">
                   Te avisamos.
                   <br /> Vos decidís.
                 </span>
               </h1>
 
               <p
-                className="text-lg text-[#666] leading-relaxed mb-8 max-w-lg"
+                className="text-lg text-[#8c6a58] leading-relaxed mb-8 max-w-lg"
                 style={{ animation: "fadeInUp 0.6s 0.12s ease-out both" }}
               >
-                Monitoreamos miles de rutas buscando tarifas error, flash sales
-                y ventanas de precio que se cierran rápido. Vos recibís la
-                alerta, comprás directo.
+                <span className="block">Escaneamos miles de rutas todo el día.</span>
+                <span className="block">Vos te enterás primero.</span>
               </p>
 
               <div style={{ animation: "fadeInUp 0.6s 0.2s ease-out both" }}>
                 <EmailForm />
-                <p className="mt-4 text-xs text-[#aaa]">
+                <p className="mt-4 text-xs text-[#b09080]">
                   Gratis para siempre · Sin spam · Podés darte de baja cuando
                   quieras
                 </p>
@@ -238,7 +237,7 @@ export default function Home() {
                 <div
                   className="absolute top-6 left-4 w-72 h-[22rem] rounded-2xl"
                   style={{
-                    background: "#F0F0F0",
+                    background: "#e8e0d4",
                     transform: "rotate(-4deg)",
                     boxShadow: "0 8px 30px rgba(0,0,0,0.06)",
                   }}
@@ -246,7 +245,7 @@ export default function Home() {
                 <div
                   className="absolute top-3 left-2 w-72 h-[22rem] rounded-2xl"
                   style={{
-                    background: "#F8F8F8",
+                    background: "#f5f0ea",
                     transform: "rotate(-1.5deg)",
                     boxShadow: "0 8px 30px rgba(0,0,0,0.05)",
                   }}
@@ -261,9 +260,9 @@ export default function Home() {
       </section>
 
       {/* ── CÓMO FUNCIONA ── */}
-      <section className="px-6 md:px-14 py-16 border-t border-[#F0F0F0]">
+      <section className="px-6 md:px-14 py-16 border-t border-[#e8e0d4]">
         <div className="max-w-7xl mx-auto">
-          <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#aaa] mb-8">
+          <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#b09080] mb-8">
             Cómo funciona
           </p>
 
@@ -287,10 +286,10 @@ export default function Home() {
             ].map((step, i) => (
               <div
                 key={step.num}
-                className="relative px-0 py-10 md:px-10 md:py-8 border-t md:border-t-0 md:border-l border-[#F0F0F0] first:border-t-0 first:border-l-0"
+                className="relative px-0 py-10 md:px-10 md:py-8 border-t md:border-t-0 md:border-l border-[#e8e0d4] first:border-t-0 first:border-l-0"
               >
                 <span
-                  className="absolute -top-2 left-0 md:left-8 text-[8rem] font-extrabold text-[#FF5C00] leading-none select-none pointer-events-none"
+                  className="absolute -top-2 left-0 md:left-8 text-[8rem] font-extrabold text-[#e07842] leading-none select-none pointer-events-none"
                   style={{ opacity: 0.06 }}
                 >
                   {step.num}
@@ -302,13 +301,13 @@ export default function Home() {
                     marginTop: i === 1 ? "1.5rem" : i === 2 ? "-0.5rem" : "0",
                   }}
                 >
-                  <span className="block text-2xl font-extrabold text-[#FF5C00] mb-4 tabular-nums">
+                  <span className="block text-2xl font-extrabold text-[#e07842] mb-4 tabular-nums">
                     {step.num}
                   </span>
-                  <h3 className="text-xl font-bold text-[#111] mb-3">
+                  <h3 className="text-xl font-bold text-[#3d2b1f] mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-[#666] leading-relaxed text-[15px]">
+                  <p className="text-[#8c6a58] leading-relaxed text-[15px]">
                     {step.desc}
                   </p>
                 </div>
@@ -319,9 +318,9 @@ export default function Home() {
       </section>
 
       {/* ── POR QUÉ VOLA YA ── */}
-      <section className="px-6 md:px-14 py-16 bg-[#F5F5F5]">
+      <section className="px-6 md:px-14 py-16 bg-[#f0ebe3]">
         <div className="max-w-7xl mx-auto">
-          <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#aaa] mb-8">
+          <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#b09080] mb-8">
             Por qué Vola Ya
           </p>
 
@@ -346,14 +345,14 @@ export default function Home() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="flex gap-5 py-9 border-b border-[#E5E5E5] last:border-0 md:[&:nth-last-child(2)]:border-0"
+                className="flex gap-5 py-9 border-b border-[#e0d8ce] last:border-0 md:[&:nth-last-child(2)]:border-0"
               >
-                <div className="w-1 flex-shrink-0 rounded-full bg-[#FF5C00] self-stretch min-h-[2rem]" />
+                <div className="w-1 flex-shrink-0 rounded-full bg-[#e07842] self-stretch min-h-[2rem]" />
                 <div>
-                  <h3 className="text-xl font-bold text-[#111] mb-2">
+                  <h3 className="text-xl font-bold text-[#3d2b1f] mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-[#666] leading-relaxed text-[15px]">
+                  <p className="text-[#8c6a58] leading-relaxed text-[15px]">
                     {item.desc}
                   </p>
                 </div>
@@ -364,43 +363,43 @@ export default function Home() {
       </section>
 
       {/* ── CTA FINAL ── */}
-      <section className="px-6 md:px-14 py-20 bg-white border-t border-[#F0F0F0]">
+      <section className="px-6 md:px-14 py-20 bg-[#faf6f1] border-t border-[#e8e0d4]">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-5xl md:text-7xl font-extrabold text-[#FF5C00] leading-[0.88] tracking-[-0.02em] mb-5">
+          <h2 className="text-5xl md:text-7xl font-extrabold text-[#e07842] leading-[0.88] tracking-[-0.02em] mb-5">
             Ofertas que
             <br />
             vuelan.
           </h2>
-          <p className="text-[#444] text-lg mb-10 leading-relaxed">
+          <p className="text-[#7d5a48] text-lg mb-10 leading-relaxed">
             Anotate gratis y empezamos a mandarte alertas de vuelos desde
             Sudamérica.
           </p>
           <EmailForm />
-          <p className="mt-5 text-[#aaa] text-xs">
+          <p className="mt-5 text-[#b09080] text-xs">
             Gratis para siempre · Sin spam · Podés darte de baja cuando quieras
           </p>
         </div>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="px-6 md:px-14 py-7 border-t border-[#F0F0F0]">
+      <footer className="px-6 md:px-14 py-7 border-t border-[#e8e0d4]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <span className="text-base font-extrabold tracking-tight">
-            vola<span className="text-[#FF5C00]">ya</span>
+            vola<span className="text-[#e07842]">ya</span>
           </span>
-          <p className="text-xs text-[#bbb]">
+          <p className="text-xs text-[#c0a890]">
             © 2026 Vola Ya. Todos los derechos reservados.
           </p>
           <div className="flex gap-6">
             <a
               href="#"
-              className="text-xs text-[#aaa] hover:text-[#111] transition-colors"
+              className="text-xs text-[#b09080] hover:text-[#3d2b1f] transition-colors"
             >
               Términos
             </a>
             <a
               href="#"
-              className="text-xs text-[#aaa] hover:text-[#111] transition-colors"
+              className="text-xs text-[#b09080] hover:text-[#3d2b1f] transition-colors"
             >
               Privacidad
             </a>
