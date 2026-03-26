@@ -31,6 +31,15 @@
   50% { transform: rotate(3deg) translateY(-8px); }
 }
 
+@keyframes heroFloat {
+  0%, 100% {
+    transform: translateY(0px) rotateZ(-0.2deg);
+  }
+  50% {
+    transform: translateY(-4px) rotateZ(0.2deg);
+  }
+}
+
 body {
   background: #faf6f1;
   color: #3d2b1f;
