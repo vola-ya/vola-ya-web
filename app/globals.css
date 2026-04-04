@@ -10,34 +10,9 @@
   --font-sans: var(--font-plus-jakarta);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 @keyframes floatCard {
   0%, 100% { transform: rotate(3deg) translateY(0px); }
   50% { transform: rotate(3deg) translateY(-8px); }
-}
-
-@keyframes heroFloat {
-  0%, 100% {
-    transform: translateY(0px) rotateZ(-0.2deg);
-  }
-  50% {
-    transform: translateY(-4px) rotateZ(0.2deg);
-  }
 }
 
 body {

@@ -1,29 +1,96 @@
+"use client";
+
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DEALS } from "../lib/data";
 import { GRADIENTS } from "../lib/constants";
 import SectionHeader from "./SectionHeader";
 
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 export default function OpportunitiesSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // Section header fades in
+        gsap.from(".opp-header", {
+          autoAlpha: 0,
+          y: 24,
+          duration: 0.65,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".opp-header",
+            start: "top 88%",
+          },
+        });
+
+        // Cards stagger up with a subtle scale
+        ScrollTrigger.batch(".deal-card", {
+          start: "top 88%",
+          onEnter: (batch) =>
+            gsap.to(batch, {
+              autoAlpha: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.65,
+              ease: "power3.out",
+              stagger: 0.12,
+            }),
+          once: true,
+        });
+
+        // Set initial hidden state
+        gsap.set(".deal-card", { autoAlpha: 0, y: 52, scale: 0.96 });
+      });
+    },
+    { scope: sectionRef }
+  );
+
   return (
-    <section className="px-6 md:px-14 py-20 border-t border-[#e8e0d4]">
+    <section
+      ref={sectionRef}
+      className="px-6 md:px-14 py-20 border-t border-[#e8e0d4]"
+    >
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
+        <div className="opp-header flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
           <SectionHeader
             label="Alertas recientes"
             title="Oportunidades de hoy"
             subtitle="¡No te pierdas el próximo! Estas ofertas se las enviamos a los usuarios en las últimas 48hs."
           />
-          <a href="#" className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#e07842] hover:opacity-70 transition-opacity whitespace-nowrap mb-8">
+          <a
+            href="#"
+            className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#e07842] hover:opacity-70 transition-opacity whitespace-nowrap mb-8"
+          >
             Ver historial completo
             <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
-              <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M4 10h12M10 4l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </a>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
           {DEALS.map((card) => (
-            <div key={card.city} className={`cursor-pointer group ${card.offset ? "md:mt-10" : ""}`}>
-              <div className="relative rounded-2xl overflow-hidden mb-4" style={{ height: 340 }}>
+            <div
+              key={card.city}
+              className={`deal-card cursor-pointer group ${card.offset ? "md:mt-10" : ""}`}
+            >
+              <div
+                className="relative rounded-2xl overflow-hidden mb-4"
+                style={{ height: 340 }}
+              >
                 <img
                   src={card.img}
                   alt={card.city}
@@ -46,7 +113,9 @@ export default function OpportunitiesSection() {
 
               <div className="flex items-start justify-between px-1">
                 <div>
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-[#e07842] mb-1">{card.location}</p>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-[#e07842] mb-1">
+                    {card.location}
+                  </p>
                   <h3 className="text-xl font-extrabold text-[#3d2b1f]">{card.city}</h3>
                 </div>
                 <div className="text-right">
