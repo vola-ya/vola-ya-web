@@ -11,33 +11,33 @@ gsap.registerPlugin(useGSAP);
 const SETS: { route: string; saving: string; price: string; label: string; dark?: boolean }[][] = [
   [
     { route: "EZE → LIM", saving: "-51%", price: "$220", label: "Error de tarifa", dark: false },
-    { route: "GRU → BOG", saving: "-47%", price: "$275", label: "Oferta flash",    dark: false },
-    { route: "SCL → MVD", saving: "-38%", price: "$189", label: "Precio mínimo",   dark: true  },
+    { route: "GRU → BOG", saving: "-47%", price: "$275", label: "Oferta flash", dark: false },
+    { route: "SCL → MVD", saving: "-38%", price: "$189", label: "Precio mínimo", dark: true },
   ],
   [
-    { route: "BOG → MEX", saving: "-44%", price: "$310", label: "Tarifa oculta",   dark: false },
-    { route: "LIM → MAD", saving: "-52%", price: "$490", label: "Error de tarifa", dark: true  },
-    { route: "EZE → MIA", saving: "-41%", price: "$350", label: "Oferta flash",    dark: true  },
+    { route: "BOG → MEX", saving: "-44%", price: "$310", label: "Tarifa oculta", dark: false },
+    { route: "LIM → MAD", saving: "-52%", price: "$490", label: "Error de tarifa", dark: true },
+    { route: "EZE → MIA", saving: "-41%", price: "$350", label: "Oferta flash", dark: true },
   ],
 ];
 
 // [x, y] offsets from container center
 const POSITIONS = [
-  [ [-175, -145], [195, 10], [-155, 155] ],
-  [ [  175, -145], [-195, 10], [ 155, 155] ],
+  [[-175, -145], [195, 10], [-155, 155]],
+  [[175, -145], [-195, 10], [155, 155]],
 ] as const;
 
 // ─── Floating alert card ──────────────────────────────────────────────────────
 function AlertCard({ route, saving, price, label, dark = false, id }: {
   route: string; saving: string; price: string; label: string; dark?: boolean; id: string;
 }) {
-  const bg      = dark ? "#3d2b1f"                        : "rgba(255,255,255,0.96)";
-  const border  = dark ? "1px solid rgba(224,120,66,0.3)" : "1px solid rgba(224,120,66,0.18)";
-  const shadow  = dark
+  const bg = dark ? "#3d2b1f" : "rgba(255,255,255,0.96)";
+  const border = dark ? "1px solid rgba(224,120,66,0.3)" : "1px solid rgba(224,120,66,0.18)";
+  const shadow = dark
     ? "0 10px 32px rgba(0,0,0,0.28), 0 2px 8px rgba(224,120,66,0.15)"
     : "0 8px 28px rgba(0,0,0,0.12), 0 2px 8px rgba(224,120,66,0.1)";
-  const routeColor  = dark ? "#faf6f1" : "#3d2b1f";
-  const labelColor  = dark ? "#c8a090" : "#8c6a58";
+  const routeColor = dark ? "#faf6f1" : "#3d2b1f";
+  const labelColor = dark ? "#c8a090" : "#8c6a58";
   const planeStroke = dark ? "#e07842" : "#e07842";
 
   return (
@@ -65,7 +65,7 @@ function AlertCard({ route, saving, price, label, dark = false, id }: {
         <div className="flex items-center justify-between mb-1">
           <div className="flex items-center gap-1">
             <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke={planeStroke} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 19-7z"/>
+              <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 19-7z" />
             </svg>
             <span className="text-[11px] font-black tracking-tight" style={{ color: routeColor }}>{route}</span>
           </div>
@@ -220,20 +220,37 @@ function PhoneFrame() {
               </span>
             </div>
 
-            {/* Inner radar */}
-            <div className="flex-1 flex items-center justify-center">
-              <div className="relative flex items-center justify-center" style={{ width: 100, height: 100 }}>
-                {[1, 2, 3].map((r) => (
+            {/* Scrolling destinations */}
+            <div className="flex-1 overflow-hidden" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)" }}>
+              <div style={{ animation: "scrollUp 12s linear infinite" }}>
+                {[
+                  { from: "EZE", to: "LIM", price: "$220", hot: false },
+                  { from: "GRU", to: "BOG", price: "$275", hot: false },
+                  { from: "SCL", to: "MVD", price: "$189", hot: true },
+                  { from: "BOG", to: "MEX", price: "$310", hot: false },
+                  { from: "LIM", to: "MAD", price: "$490", hot: false },
+                  { from: "EZE", to: "MIA", price: "$350", hot: true },
+                  { from: "GRU", to: "SCL", price: "$165", hot: false },
+                  { from: "BOG", to: "LIM", price: "$240", hot: false },
+                  // duplicate for seamless loop
+                  { from: "EZE", to: "LIM", price: "$220", hot: true },
+                  { from: "GRU", to: "BOG", price: "$275", hot: false },
+                  { from: "SCL", to: "MVD", price: "$189", hot: true },
+                  { from: "BOG", to: "MEX", price: "$310", hot: false },
+                  { from: "LIM", to: "MAD", price: "$490", hot: true },
+                  { from: "EZE", to: "MIA", price: "$350", hot: false },
+                  { from: "GRU", to: "SCL", price: "$165", hot: false },
+                  { from: "BOG", to: "LIM", price: "$240", hot: true },
+                ].map((d, i) => (
                   <div
-                    key={r}
-                    className={`inner-ring-${r} absolute rounded-full border border-[#e07842]`}
-                    style={{ width: r * 32, height: r * 32, opacity: 0.1 + r * 0.07 }}
-                  />
+                    key={i}
+                    className="flex items-center justify-between px-1.5 py-1.5 border-b border-[#e8ddd4]/60 last:border-0"
+                    style={d.hot ? { background: "linear-gradient(90deg, rgba(224,120,66,0.13) 0%, rgba(224,120,66,0.06) 100%)", borderRadius: 6 } : undefined}
+                  >
+                    <span className="text-[9px] font-bold" style={{ color: d.hot ? "#c45a20" : "#3d2b1f" }}>{d.from} → {d.to}</span>
+                    <span className="text-[10px] font-black" style={{ color: d.hot ? "#e07842" : "#8c6a58" }}>{d.price}</span>
+                  </div>
                 ))}
-                <div className="w-2.5 h-2.5 rounded-full" style={{ background: GRADIENTS.primary, opacity: 0.85 }} />
-                <svg className="inner-arc absolute" style={{ width: 100, height: 100 }} viewBox="0 0 100 100">
-                  <path d="M50,4 A46,46 0 0,1 96,50" fill="none" stroke="#e07842" strokeWidth="1.5" strokeOpacity="0.45" />
-                </svg>
               </div>
             </div>
 
@@ -284,20 +301,19 @@ export default function HeroVisual() {
         });
 
         // ── Arcs rotate ──
-        gsap.to(".radar-arc", { rotation: 360, duration: 4,  ease: "none", repeat: -1, transformOrigin: "center center" });
-        gsap.to(".inner-arc", { rotation: 360, duration: 3,  ease: "none", repeat: -1, transformOrigin: "center center" });
+        gsap.to(".radar-arc", { rotation: 360, duration: 4, ease: "none", repeat: -1, transformOrigin: "center center" });
 
         // ── Phone idle ──
-        gsap.to(".phone-badge",    { scale: 1.35, duration: 0.6, ease: "sine.inOut", repeat: -1, yoyo: true });
-        gsap.to(".phone-dot",      { autoAlpha: 0, duration: 0.7, ease: "none", repeat: -1, yoyo: true });
+        gsap.to(".phone-badge", { scale: 1.35, duration: 0.6, ease: "sine.inOut", repeat: -1, yoyo: true });
+        gsap.to(".phone-dot", { autoAlpha: 0, duration: 0.7, ease: "none", repeat: -1, yoyo: true });
         gsap.to(".phone-bar-fill", { width: "100%", duration: 2.5, ease: "power1.inOut", repeat: -1, yoyo: true, repeatDelay: 0.3 });
 
         // ── Burst cycle ──
-        const BURST   = 0.5;
+        const BURST = 0.5;
         const STAGGER = 0.45;
-        const HOLD    = 1.8;
-        const FADE    = 0.4;
-        const GAP     = 0.5;
+        const HOLD = 1.8;
+        const FADE = 0.4;
+        const GAP = 0.5;
 
         function firePulse(pulseId: string) {
           const el = document.getElementById(pulseId);
@@ -310,7 +326,7 @@ export default function HeroVisual() {
 
         function runCycle(setIndex: 0 | 1, onComplete: () => void) {
           const positions = POSITIONS[setIndex];
-          const cards  = [0, 1, 2].map((i) => document.getElementById(`alert-${setIndex}-${i}`));
+          const cards = [0, 1, 2].map((i) => document.getElementById(`alert-${setIndex}-${i}`));
           const pulses = [0, 1, 2].map((i) => `pulse-${setIndex}-${i}`);
 
           // Reset all cards to center

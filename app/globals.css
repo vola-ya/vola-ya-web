@@ -15,10 +15,16 @@ body {
   color: #3d2b1f;
 }
 
-/* Destination marquee */
+/* Destination marquee (horizontal) */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+
+/* Phone destination scroll (vertical) */
+@keyframes scrollUp {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
 }
 
 .marquee-track {

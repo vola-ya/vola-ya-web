@@ -224,7 +224,7 @@ export default function HeroSection() {
 
             <div className="hero-form">
               <EmailForm />
-              <p className="mt-4 text-xs text-[#b09080]">Solo te escribimos cuando vale la pena.</p>
+              <p className="mt-4 text-xs text-[#b09080]">Te alertamos sobre los destinos que elijas</p>
             </div>
 
             <div className="hero-stats mt-14 grid grid-cols-2 gap-x-12 gap-y-10">
