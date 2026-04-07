@@ -17,48 +17,48 @@ export default function WhyVolaYa() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        // Section header
         gsap.from(".why-header", {
           autoAlpha: 0,
-          y: 24,
-          duration: 0.65,
+          y: 28,
+          duration: 0.7,
           ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".why-header",
-            start: "top 88%",
-          },
+          scrollTrigger: { trigger: ".why-header", start: "top 88%" },
         });
 
-        // Feature items slide in from the left
+        // Set initial state — items slide in with subtle 3D tilt
+        gsap.set(".feature-item", {
+          autoAlpha: 0,
+          x: -32,
+          rotationX: 12,
+          transformPerspective: 800,
+        });
+        gsap.set(".feature-bar", { scaleY: 0, transformOrigin: "top center" });
+
         ScrollTrigger.batch(".feature-item", {
           start: "top 86%",
           onEnter: (batch) =>
             gsap.to(batch, {
               autoAlpha: 1,
               x: 0,
-              duration: 0.6,
+              rotationX: 0,
+              duration: 0.7,
               ease: "power3.out",
               stagger: 0.1,
             }),
           once: true,
         });
 
-        // Orange bar grows from top down
         ScrollTrigger.batch(".feature-bar", {
           start: "top 86%",
           onEnter: (batch) =>
             gsap.to(batch, {
               scaleY: 1,
-              duration: 0.7,
+              duration: 0.75,
               ease: "power2.out",
               stagger: 0.1,
             }),
           once: true,
         });
-
-        // Set initial states
-        gsap.set(".feature-item", { autoAlpha: 0, x: -30 });
-        gsap.set(".feature-bar", { scaleY: 0, transformOrigin: "top center" });
       });
     },
     { scope: sectionRef }

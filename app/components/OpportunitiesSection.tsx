@@ -10,6 +10,10 @@ import SectionHeader from "./SectionHeader";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+// Destination names for the marquee strip
+const DESTINATIONS =
+  "Cusco · Buenos Aires · Río de Janeiro · Santiago · Bogotá · Lima · Cartagena · Medellín · Montevideo · São Paulo · Quito · Asunción ·\u00A0";
+
 export default function OpportunitiesSection() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -18,35 +22,40 @@ export default function OpportunitiesSection() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        // Section header fades in
         gsap.from(".opp-header", {
           autoAlpha: 0,
-          y: 24,
-          duration: 0.65,
+          y: 28,
+          duration: 0.7,
           ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".opp-header",
-            start: "top 88%",
-          },
+          scrollTrigger: { trigger: ".opp-header", start: "top 88%" },
         });
 
-        // Cards stagger up with a subtle scale
-        ScrollTrigger.batch(".deal-card", {
-          start: "top 88%",
-          onEnter: (batch) =>
-            gsap.to(batch, {
+        // Each card enters from a distinct direction
+        const cards = gsap.utils.toArray<HTMLElement>(".deal-card");
+        const from = [
+          { x: -60, y: 30, rotation: -2 },
+          { x: 0,   y: 80, rotation: 0 },
+          { x: 60,  y: 30, rotation: 2 },
+        ];
+
+        cards.forEach((card, i) => {
+          const dir = from[i] ?? { x: 0, y: 40, rotation: 0 };
+          gsap.fromTo(
+            card,
+            { autoAlpha: 0, x: dir.x, y: dir.y, rotation: dir.rotation, scale: 0.94 },
+            {
               autoAlpha: 1,
+              x: 0,
               y: 0,
+              rotation: 0,
               scale: 1,
-              duration: 0.65,
+              duration: 0.9,
               ease: "power3.out",
-              stagger: 0.12,
-            }),
-          once: true,
+              delay: i * 0.13,
+              scrollTrigger: { trigger: ".opp-cards", start: "top 85%" },
+            }
+          );
         });
-
-        // Set initial hidden state
-        gsap.set(".deal-card", { autoAlpha: 0, y: 52, scale: 0.96 });
       });
     },
     { scope: sectionRef }
@@ -55,10 +64,10 @@ export default function OpportunitiesSection() {
   return (
     <section
       ref={sectionRef}
-      className="px-6 md:px-14 py-20 border-t border-[#e8e0d4]"
+      className="px-6 md:px-14 py-20 border-t border-[#e8e0d4] overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="opp-header flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
+        <div className="opp-header flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
           <SectionHeader
             label="Alertas recientes"
             title="Oportunidades de hoy"
@@ -81,7 +90,15 @@ export default function OpportunitiesSection() {
           </a>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
+        {/* Destination marquee */}
+        <div className="relative mb-10 overflow-hidden" aria-hidden>
+          <div className="marquee-track flex whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.18em] text-[#e07842]/50">
+            <span className="marquee-content">{DESTINATIONS}</span>
+            <span className="marquee-content" aria-hidden>{DESTINATIONS}</span>
+          </div>
+        </div>
+
+        <div className="opp-cards grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
           {DEALS.map((card) => (
             <div
               key={card.city}

@@ -17,41 +17,54 @@ export default function HowItWorks() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        // Section header
         gsap.from(".hiw-header", {
           autoAlpha: 0,
-          y: 24,
-          duration: 0.65,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".hiw-header",
-            start: "top 88%",
-          },
-        });
-
-        // Step cards stagger in
-        gsap.from(".step-card", {
-          autoAlpha: 0,
-          y: 48,
+          y: 28,
           duration: 0.7,
-          ease: "power3.out",
-          stagger: 0.14,
-          scrollTrigger: {
-            trigger: ".steps-grid",
-            start: "top 82%",
-          },
+          ease: "power2.out",
+          scrollTrigger: { trigger: ".hiw-header", start: "top 88%" },
         });
 
-        // Big background numbers scale in separately
+        // Connector line scales in from left → right
+        gsap.from(".hiw-connector", {
+          scaleX: 0,
+          transformOrigin: "left center",
+          duration: 1.1,
+          ease: "power2.inOut",
+          scrollTrigger: { trigger: ".steps-grid", start: "top 82%" },
+        });
+
+        // Cards enter with stagger — each from a distinct direction
+        const cards = gsap.utils.toArray<HTMLElement>(".step-card");
+        const directions = [
+          { x: -50, y: 30 },
+          { x: 0, y: 60 },
+          { x: 50, y: 30 },
+        ];
+        cards.forEach((card, i) => {
+          gsap.from(card, {
+            autoAlpha: 0,
+            x: directions[i]?.x ?? 0,
+            y: directions[i]?.y ?? 40,
+            scale: 0.96,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".steps-grid",
+              start: "top 82%",
+            },
+            delay: i * 0.13,
+          });
+        });
+
+        // Ghost numbers pop
         gsap.from(".step-num", {
-          scale: 0.6,
-          duration: 0.9,
-          ease: "power2.out",
+          scale: 0.5,
+          autoAlpha: 0,
+          duration: 1,
+          ease: "back.out(1.5)",
           stagger: 0.14,
-          scrollTrigger: {
-            trigger: ".steps-grid",
-            start: "top 82%",
-          },
+          scrollTrigger: { trigger: ".steps-grid", start: "top 82%" },
         });
       });
     },
@@ -72,11 +85,18 @@ export default function HowItWorks() {
           />
         </div>
 
+        {/* Connector line — desktop only */}
+        <div className="hidden md:block mb-0 -mt-2 px-10" aria-hidden>
+          <div
+            className="hiw-connector h-px bg-gradient-to-r from-transparent via-[#e07842]/30 to-transparent"
+          />
+        </div>
+
         <div className="steps-grid grid md:grid-cols-3">
           {STEPS.map((step, i) => (
             <div
               key={step.num}
-              className="step-card relative px-0 py-10 md:px-10 md:py-8 border-t md:border-t-0 md:border-l border-[#e8e0d4] first:border-t-0 first:border-l-0"
+              className="step-card relative px-0 py-12 md:px-10 md:py-12 md:border-l border-[#e8e0d4] md:first:border-l-0"
             >
               <span
                 className="step-num absolute -top-2 left-0 md:left-8 text-[8rem] font-extrabold text-[#e07842] leading-none select-none pointer-events-none"

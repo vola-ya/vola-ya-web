@@ -28,7 +28,7 @@ export default function EmailForm({ dark = false, buttonLabel = "Empezar a ahorr
   }
 
   return (
-    <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-3 ${dark ? "justify-center" : ""}`}>
+    <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-3 ${dark ? "items-center sm:justify-center" : ""}`}>
       <div className={`relative ${dark ? "w-56" : "flex-1"}`}>
         <svg
           className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none"
